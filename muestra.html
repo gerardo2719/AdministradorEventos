@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Eventos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Color de fondo general */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff; /* Fondo blanco para filas pares */
+        }
+
+        tr:nth-child(odd) {
+            background-color: #000; /* Fondo negro para filas impares */
+            color: white; /* Texto blanco para filas impares */
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Eventos</h1>
+
+    <table id="event-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+            </tr>
+        </thead>
+        <tbody id="event-list"></tbody>
+    </table>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Obtén la referencia al elemento de la tabla
+    var eventTable = document.getElementById('event-list');
+
+    // Carga el archivo JSON externo
+    fetch('events.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar el archivo JSON');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!Array.isArray(data)) {
+                throw new Error('Los datos no son un array JSON válido');
+            }
+
+            // Itera sobre los eventos y crea filas de tabla para cada uno
+            data.forEach(event => {
+                var tableRow = document.createElement('tr');
+                tableRow.innerHTML = `
+                    <td>${event.nombre}</td>
+                    <td>${event.fecha}</td>
+                    <td>${event.lugar}</td>
+                `;
+                eventTable.appendChild(tableRow);
+            });
+        })
+        .catch(error => console.error('Error al cargar el archivo JSON:', error));
+    });
+
+    </script>
+</body>
+</html>

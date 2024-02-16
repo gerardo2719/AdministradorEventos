@@ -1,0 +1,12 @@
+[
+    {
+        "nombre": "Evento 1",
+        "fecha": "2024-02-20",
+        "lugar": "Lugar 1"
+    },
+    {
+        "nombre": "Evento 2",
+        "fecha": "2024-02-25",
+        "lugar": "Lugar 2"
+    }
+]
