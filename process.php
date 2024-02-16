@@ -2,10 +2,10 @@
 // Verificar si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
-    $eventName = $_POST['eventName'];
-    $eventDate = $_POST['eventDate'];
-    $eventLocation = $_POST['eventLocation'];
-    $action = $_POST['action'];
+    $eventName = htmlspecialchars($_POST['eventName']);
+    $eventDate = htmlspecialchars($_POST['eventDate']);
+    $eventLocation = htmlspecialchars($_POST['eventLocation']);
+    $action = htmlspecialchars($_POST['action']);
 
     // Cargar eventos existentes desde el archivo JSON
     $events = json_decode(file_get_contents('events.json'), true);
@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Aquí asumimos que el nombre del evento se utiliza como identificador único
             foreach ($events as &$event) {
                 if ($event['nombre'] === $eventName) {
+                    $event['nombre'] = $eventName; // Necesario para mantener el mismo nombre
                     $event['fecha'] = $eventDate;
                     $event['lugar'] = $eventLocation;
                     break;
