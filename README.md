@@ -1,6 +1,7 @@
 # AdministradorEventos
 Sistema de administración de eventos utilizando PHP,HTML Y JS simple y con panel de administración para el cliente
 Voy a explicar la forma más viable que he llegado a conclusión después de pensar y hacer alguna prueba. Ya está desarrollado para ser implementado ya.
+
 -Los eventos se guardan en events.json
 
 -Se editan desde index.php (Panel de administración de eventos)
